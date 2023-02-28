@@ -27,7 +27,7 @@ Each process should do the above steps in an infinite loop, continuously trying 
 
 Formally define the algorithm in Promela. This requires creating a model of the processes together with the necessary global state with which they communicate. For part one, only model two processes.
 
-Start from the template that follows:
+Extend this template (in the file `HW2_1.pml`) with your implementation:
 
 ```promela
 #define NTHREADS 2
@@ -43,26 +43,26 @@ active [NTHREADS] proctype process()
 }
 ```
 
-Feel free to use Spin to simulate while developing to debug and make sure that your model works as expected. To simulate a file called `my_file.pml` from the command line, use `spin my_file.pml`. It will probably run forever because your processes repeatedly try to enter the critical section. Use `spin -u100 my_file.pml` to simulate it for 100 steps and stop. See [this man page](https://spinroot.com/spin/Man/Spin.html) for more simulation options. You don't have to simulate if you don't want to- in the next part you will formally verify that your model is correct. 
+Feel free to use Spin to simulate while developing to debug and make sure that your model works as expected. To simulate a Promela file from the command line, use `spin my_file.pml` (in this case, replace `my_file.pml` with `HW2_1.pml`). It will probably run forever because your processes repeatedly try to enter the critical section. Use `spin -u100 my_file.pml` to simulate it for 100 steps and stop. See [this man page](https://spinroot.com/spin/Man/Spin.html) for more simulation options. The focus of this assignment isn't simulation- in the next part you will formally verify that your model is correct!
 
 ### Part 1b
 
-Augment your model with an LTL specification to check the following three properties:
+Keep working in your `HW2_1.pml` for this part. Augment your model with an LTL specification to check the following three properties:
   - mutual exclusion in the critical section, i.e., only a single process is at the critical section at any time;
   - flag slots (in `queue`) are used in order; and
   - starvation-freedom, i.e., a process that tries to enter the critical section will eventually enter (your LTL formula might need to manually refer to all threads one by one for checking starvation freedom, meaning that your code for checking it might not be parametric with respect to `NTHREADS`).
 
-Use `spin -run my_file.pml` (replacing `my_file.pml` with the name of your .pml file) to check that these three properties are satisfied. The `-run` option is shorthand for telling Spin to generate C code to verify your model, compile that code, and run that code. From our perspective, it just means "try to verify my model".
+Use `spin -run my_file.pml` (replacing `my_file.pml` with the name of your `.pml` file) to check that these three properties are satisfied. The `-run` option is shorthand for telling Spin to generate C code to verify your model, compile that code, and run that code. From our perspective, it just means "try to verify my model".
 
-Check to see if you have any errors in the `spin` report.
+Check to see if you have any errors in the report that Spin writes to your terminal.
 
-Spin might find state cycles in your program. If this error stems from unfair scheduling of processes (perhaps a process is never scheduled) you can safely suppress this error by invoking `spin -run` with the `-f` flag. The `-f` flag stands for "weak fairness" and ensures that every process will be scheduled always eventually. It might help for part 3 to think about why a cycle is found.
+Spin might find state cycles in your program (potentially causing an error to be reported). If this error stems from unfair scheduling of processes (perhaps a process is never scheduled) you can safely suppress this error by invoking `spin -run` with the `-f` flag. The `-f` flag stands for "weak fairness" and ensures that every process will be scheduled always eventually. It might help for part 3 to think about why a cycle is found.
 
 Use `spin -run -f my_file.pml`. Make sure that there are no errors in the `spin` report (your model meets the LTL spec).
 
 ### Part 2
 
-Change `NTHREADS = 3` and try to verify the properties again. Does any of them fail? Why is that?
+For this part, we will work in `HW2_2.pml`. First, copy the entire contents of your completed `HW2_1.pml` to `HW2_2.pml`. Then change `NTHREADS = 3` and try to verify the properties again. Do any of them fail? Why is that?
 
 Modify your model (you might have to deviate from the English spec) to fix this error and explain why your modification is reasonable. Write your explanation as a comment at the bottom of the .pml file. 
 
@@ -72,7 +72,7 @@ Credits to Caleb Stanford who suggested this part.
 
 Is it possible to have a mutual exclusion algorithm for multiple processes that does not use an atomic `get-and-increment` but instead only uses reads and writes?
 
-Come up with such an algorithm and verify that it guarantees mutual exclusion. Write your code in a new file called `HW3_3.pml`.
+Come up with such an algorithm and verify that it guarantees mutual exclusion. Write your code in a new file called `HW2_3.pml`.
 
 Does your algorithm sacrifice any of the above properties (FIFO, starvation-freedom)?
 
@@ -85,7 +85,7 @@ Part 1: A file `HW2_1.pml` that contains your Promela code (including LTL formul
 
 Part 2: A file `HW2_2.pml` that contains your modified Promela code (an explicit indication of the modification would be nice), a brief explanation of the modification and why it is necessary (in a comment at the bottom of the file). Also submit a `.txt` file containing the output of spin when invoked using the `-run` flag. You can easily generate such a `.txt` file by running `spin -run -f HW2_2.pml > HW2_2_output.txt`.
 
-Part 3 (Optional): Your code, Spin's output, and a brief explanation of the algorithm and the sacrificed property (if any).
+Part 3 (Optional): Your code, Spin's output, and a brief explanation of the algorithm and the sacrificed properties (if any).
 
 ### Hints
 
