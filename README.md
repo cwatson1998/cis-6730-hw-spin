@@ -30,3 +30,10 @@ There is a homebrew formula for Spin, but I haven't tried it. This [https://www.
 
 ### Check your install
 To check that your installation is working you can run `spin -V`.
+
+## HW #2
+All the instructions are in announcement.md !
+
+The [Spin manual](https://spinroot.com/spin/Man/Manual.html) and [man pages](https://spinroot.com/spin/Man/promela.html) are good reference resources. 
+
+
