@@ -13,9 +13,9 @@ Your goal is to formally define it using Promela, and then verify that it satisf
 
 Suppose that you have `NTHREADS` processes that can content for access to the critical section. 
 
-The global state of the algorithm includes an `NTHREADS`-cell array of booleans (that we will call `queue`) and a global counter variable of type `byte` (that we call `cnt`). It is important that `cnt` is of type `byte` so that the size of the state space is not too big.
+The global state of the algorithm includes an `NTHREADS`-cell array of booleans (that we will call `queue`) and a global counter variable of type `byte` (that we will call `cnt`). It is important that `cnt` be of type `byte` to keep the state space tractably small.
 
-Initially, `cnt` is set to `0` and `queue` is all `0`s except for the first cell which is set to `1`.
+Initially, `cnt` is set to `0` and `queue` is all `0`s except for the first position which is set to `1`.
 
 Each process first atomically gets and then increments `cnt`, storing the current (before the increment) value of `cnt` as a local variable called `my_cnt`. You'll need to use the `atomic` keyword for this. We will refer to the position indicated by `my_cnt` in `queue` as "this process's position in `queue`".
 
@@ -43,7 +43,7 @@ active [NTHREADS] proctype process()
 }
 ```
 
-Feel free to use spin to simulate while developing to debug and make sure that your model works as expected. To simulate a file called my_file.pml from the command line, use `spin my_file.pml`. It will probably run forever because your processes repeatedly try to enter the critical section. Use `spin -u100 my_file.pml` to simulate it for 100 steps and stop. See [this man page](https://spinroot.com/spin/Man/Spin.html) for more simulation options. You don't have to simulate if you don't want to- in the next part you will formally verify that your model is correct. 
+Feel free to use Spin to simulate while developing to debug and make sure that your model works as expected. To simulate a file called `my_file.pml` from the command line, use `spin my_file.pml`. It will probably run forever because your processes repeatedly try to enter the critical section. Use `spin -u100 my_file.pml` to simulate it for 100 steps and stop. See [this man page](https://spinroot.com/spin/Man/Spin.html) for more simulation options. You don't have to simulate if you don't want to- in the next part you will formally verify that your model is correct. 
 
 ### Part 1b
 
@@ -52,11 +52,11 @@ Augment your model with an LTL specification to check the following three proper
   - flag slots (in `queue`) are used in order; and
   - starvation-freedom, i.e., a process that tries to enter the critical section will eventually enter (your LTL formula might need to manually refer to all threads one by one for checking starvation freedom, meaning that your code for checking it might not be parametric with respect to `NTHREADS`).
 
-Use `spin -run my_file.pml` (replacing `my_file.pml` with the name of your .pml file) to check that these three properties are satisfied. The `-run` option is shorthand for telling Spin to generate C code to verify your model, compile that code, and run that code. From our perspective, it just means "try to verify my model". S
+Use `spin -run my_file.pml` (replacing `my_file.pml` with the name of your .pml file) to check that these three properties are satisfied. The `-run` option is shorthand for telling Spin to generate C code to verify your model, compile that code, and run that code. From our perspective, it just means "try to verify my model".
 
 Check to see if you have any errors in the `spin` report.
 
-Spin might find state cycles in your program. If this error stems from unfair scheduling of processes, e.g., a process is never scheduled, you can safely suppress this error, by invoking `spin -run` with the `-f` flag, ensuring that every process will be scheduled always eventually. It might help for part 3 to think about why a cycle is found.
+Spin might find state cycles in your program. If this error stems from unfair scheduling of processes (perhaps a process is never scheduled) you can safely suppress this error by invoking `spin -run` with the `-f` flag. The `-f` flag stands for "weak fairness" and ensures that every process will be scheduled always eventually. It might help for part 3 to think about why a cycle is found.
 
 Use `spin -run -f my_file.pml`. Make sure that there are no errors in the `spin` report (your model meets the LTL spec).
 
@@ -81,9 +81,9 @@ Hint: Your might be able to use the ideas from Peterson's algorithm as a buildin
 ### Deliverables
 There are 4 files you should submit (and optionally two more if you did part 3). You can upload them to [gradescope](https://www.gradescope.com/courses/517616) (I made a gradescope for this class recently- I'll add everyone to it soon).
 
-Part 1: Your Promela code (including assertions and ltl formulas) in the file `HW2_1.pml` and the output of spin when invoked using the `-run` flag. You can easily generate a .txt file containing this output by running `spin -run -f HW2_1.pml > HW2_1_output.txt`.
+Part 1: A file `HW2_1.pml` that contains your Promela code (including LTL formulas and any assertions). Also submit a `.txt` file containing the output of spin when invoked using the `-run` flag. You can easily generate such a `.txt` file by running `spin -run -f HW2_1.pml > HW2_1_output.txt`.
 
-Part 2: Your modified Promela code (an explicit indication of the modification would be nice), a brief explanation of the modification and why it is necessary (could be in a Promela comment), and finally the output of spin when invoked with the `-run` flag. You can easily generate a .txt file containing this output by running `spin -run -f HW2_2.pml > HW2_2_output.txt`.
+Part 2: A file `HW2_2.pml` that contains your modified Promela code (an explicit indication of the modification would be nice), a brief explanation of the modification and why it is necessary (in a comment at the bottom of the file). Also submit a `.txt` file containing the output of spin when invoked using the `-run` flag. You can easily generate such a `.txt` file by running `spin -run -f HW2_2.pml > HW2_2_output.txt`.
 
 Part 3 (Optional): Your code, Spin's output, and a brief explanation of the algorithm and the sacrificed property (if any).
 
