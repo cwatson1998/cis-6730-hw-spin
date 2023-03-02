@@ -1,9 +1,5 @@
 # Lecture on Spin and Promela
 
-
-TODO: Show how to run simulations with `spin`
-   - Take from http://web.mit.edu/spin_v6.4.7/Doc/1_Exercises.html
-
 The lecture is going to start from the basics of promela syntax since it is pretty weird.
 
 The lecture combines material from the following resources:
