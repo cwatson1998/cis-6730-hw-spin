@@ -9,7 +9,7 @@ HW #2 will be due the week after Spring Break, at 11:59pm on March 16. The assig
 ## Installing Spin
 Please read all these instructions before you start installing Spin. There are multiple approaches, so make sure you make a good choice of which tutorial to follow.
 
-We'll just be using Spin via the command line. Lots of installation guides also tell you how to install iSpin, the Spin GUI. You don't need to install iSpin.
+In lecture, I just used Spin via the command line. Lots of installation guides also tell you how to install iSpin, the Spin GUI. This will lead to a nicer user experience, but you don't need to install iSpin to complete this assignment.
 
 ### C compiler and preprocessor
 Spin needs you to have a working C compiler and preprocessor. If you have linux/mac, you likely already have one installed by default (probably gcc or clang). If you have Windows, you would have had to install one yourself. Popular ways to do this include [MinGW](https://www.mingw-w64.org/) and [Cygwin](https://www.cygwin.com/) (pick one, probably MinGW if you're just doing it for the first time). 
@@ -26,7 +26,9 @@ If you would prefer to build from source, you can clone the [official Github rep
 For a more in-depth guide on how to install (including MinGW), see [this blog post](https://blog.nathanv.me/posts/spin-windows/).
 
 ### Mac install
-There is a homebrew formula for Spin, but I haven't tried it. This [extremely boring YouTube video](https://www.youtube.com/watch?v=ADZBpmOJU_c) seems to show it working.
+Whether you have an Intel or an Apple Silicon mac, you should be able to build from source as described in the official instructions.
+
+Alternatively, there is a homebrew formula for Spin, but I haven't tried it. This [extremely boring YouTube video](https://www.youtube.com/watch?v=ADZBpmOJU_c) seems to show it working.
 
 ### Check your install
 To check that your installation is working you can run `spin -V`.
