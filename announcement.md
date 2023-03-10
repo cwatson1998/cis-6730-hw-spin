@@ -79,7 +79,7 @@ Does your algorithm sacrifice any of the above properties (FIFO, starvation-free
 Hint: Your might be able to use the ideas from Peterson's algorithm as a building block.
 
 ### Deliverables
-There are 4 files you should submit (and optionally two more if you did part 3). You can upload them to [gradescope](https://www.gradescope.com/courses/517616) (I made a gradescope for this class recently- I'll add everyone to it soon).
+There are 4 files you should submit (and optionally two more if you did part 3). You can upload them to [gradescope](https://www.gradescope.com/courses/517616) (I added everyone to gradescope on 3/10- if I missed you, send me an email!).
 
 Part 1: A file `HW2_1.pml` that contains your Promela code (including LTL formulas and any assertions). Also submit a `.txt` file containing the output of spin when invoked using the `-run` flag. You can easily generate such a `.txt` file by running `spin -run -f HW2_1.pml > HW2_1_output.txt`.
 
