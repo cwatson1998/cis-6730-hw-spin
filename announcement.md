@@ -62,9 +62,9 @@ Use `spin -run -f my_file.pml`. Make sure that there are no errors in the `spin`
 
 ### Part 2
 
-For this part, we will work in `HW2_2.pml`. First, copy the entire contents of your completed `HW2_1.pml` to `HW2_2.pml`. Then change `NTHREADS = 3` and try to verify the properties again. Do any of them fail? Why is that?
+For this part, we will work in `HW2_2.pml`. First, copy the entire contents of your completed `HW2_1.pml` to `HW2_2.pml`. Then change `NTHREADS = 3` and try to verify the properties again. Do any of them fail? If so, why is that? (It is possible that some do not fail).
 
-Modify your model (you might have to deviate from the English spec) to fix this error and explain why your modification is reasonable. Write your explanation as a comment at the bottom of the .pml file. 
+If any of them failed, modify your model (you might have to deviate from the English spec) to fix this error and explain why your modification is reasonable. Write your explanation as a comment at the bottom of the .pml file. If nothing failed, then just write that nothing failed.
 
 ### Part 3 (Optional) 
 
